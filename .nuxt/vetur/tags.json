@@ -1,0 +1,8 @@
+{
+  "Hero": {
+    "description": "Auto imported from components/Hero.vue"
+  },
+  "Loader": {
+    "description": "Auto imported from components/Loader.vue"
+  }
+}

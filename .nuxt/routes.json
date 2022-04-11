@@ -1,0 +1,16 @@
+[
+  {
+    "name": "movies-movieid",
+    "path": "/movies/:movieid?",
+    "component": "/home/crow/Documents/nuxt-movie-app/pages/movies/_movieid.vue",
+    "chunkName": "pages/movies/_movieid",
+    "_name": "_815b7730"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "/home/crow/Documents/nuxt-movie-app/pages/index.vue",
+    "chunkName": "pages/index",
+    "_name": "_1f5979e2"
+  }
+]

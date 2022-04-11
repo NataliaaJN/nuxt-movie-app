@@ -19,7 +19,7 @@
     </div>
 
     <!-- Loader -->
-    <Loader v-if="$fetchState.pending"/>
+    <Loader v-if="$fetchState.pending" />
 
     <!-- Movies -->
     <div class="container movies">
@@ -52,10 +52,10 @@
             <p class="release">
               Released:
               {{
-                new Date(movie.release_date).toLocaleString('en-us', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
+                new Date(movie.release_date).toLocaleString("en-us", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
                 })
               }}
             </p>
@@ -96,10 +96,10 @@
             <p class="release">
               Released:
               {{
-                new Date(movie.release_date).toLocaleString('en-us', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
+                new Date(movie.release_date).toLocaleString("en-us", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
                 })
               }}
             </p>
@@ -119,59 +119,71 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
       movies: [],
       searchedMovies: [],
-      searchInput: '',
-    }
+      searchInput: "",
+    };
   },
 
   async fetch() {
     // solo si no se ha introducido nada en el input, llama a todas las películas
-    if (this.searchInput === '') {
-      await this.getMovies()
-      return
+    if (this.searchInput === "") {
+      await this.getMovies();
+      return;
     }
     // si no, si se ha buscado algo, muestra solo esas películas
 
-    await this.getSearchedMovies()
+    await this.getSearchedMovies();
   },
-
+  head() {
+    return {
+      title: "Movie App - Latest Streaming Movie Info",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content:
+            "Get all the lastest streaming movies in theaters and online",
+        },
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: "movies, sream, streaming",
+        },
+      ],
+    };
+  },
   methods: {
     async getMovies() {
       const data = axios.get(
-        'https://api.themoviedb.org/3/movie/now_playing?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=en-US&page=1'
-      )
-      const result = await data
+        "https://api.themoviedb.org/3/movie/now_playing?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=en-US&page=1"
+      );
+      const result = await data;
       result.data.results.map((movie) => {
-        // return [...this.movies, movie]
-        return this.movies.push(movie)
-      })
-      // const moviesList = eachMovie
-      // console.log(moviesList)
-
-      // console.log(this.movies[0])
+        return this.movies.push(movie);
+      });
     },
 
     async getSearchedMovies() {
       const data = axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=37ed43a4f8eaa2abd75f9283692947bc&language=en-US&page=1&query=${this.searchInput}`
-      )
-      const result = await data
+      );
+      const result = await data;
       result.data.results.map((movie) => {
-        return this.searchedMovies.push(movie)
-      })
+        return this.searchedMovies.push(movie);
+      });
     },
 
     clearSearch() {
-      this.searchInput = ''
-      this.searchedMovies = []
+      this.searchInput = "";
+      this.searchedMovies = [];
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
